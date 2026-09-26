@@ -1,6 +1,7 @@
 <script lang="ts">
 	import EditorialPage from '$lib/components/EditorialPage.svelte';
 	import { _ } from 'svelte-i18n';
+	import { siteUrl } from '$lib/site.js';
 	let { data }: { data: { slug: string } } = $props();
 	const articles: Record<string, { title: string; description: string }> = {
 		'resistensi-insulin': {
@@ -31,7 +32,7 @@
 	><title>{article.title} | Dokter Metabolik</title><meta
 		name="description"
 		content={article.description}
-	/><link rel="canonical" href={'https://doktermetabolik.id/articles/' + data.slug} /></svelte:head
+	/><link rel="canonical" href={siteUrl + '/articles/' + data.slug + '/'} /></svelte:head
 >
 <EditorialPage
 	eyebrow="ARTIKEL"

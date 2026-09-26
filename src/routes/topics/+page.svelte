@@ -1,13 +1,14 @@
 <script lang="ts">
 	import EditorialPage from '$lib/components/EditorialPage.svelte';
 	import { _ } from 'svelte-i18n';
+	import { siteUrl } from '$lib/site.js';
 </script>
 
 <svelte:head
 	><title>{$_('meta.topics.title')}</title><meta
 		name="description"
 		content={$_('meta.topics.description')}
-	/><link rel="canonical" href="https://doktermetabolik.id/topics" /></svelte:head
+	/><link rel="canonical" href={siteUrl + '/topics/'} /></svelte:head
 >
 <EditorialPage
 	eyebrow={$_('topicsPage.eyebrow')}

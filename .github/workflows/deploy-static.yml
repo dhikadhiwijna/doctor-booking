@@ -16,6 +16,8 @@ concurrency:
 
 jobs:
   deploy:
+    env:
+      PUBLIC_SITE_URL: https://dhikadhiwijna.github.io/doctor-booking
     environment:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}

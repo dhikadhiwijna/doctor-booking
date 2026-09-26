@@ -1,12 +1,13 @@
 <script lang="ts">
 	import EditorialPage from '$lib/components/EditorialPage.svelte';
+	import { siteUrl } from '$lib/site.js';
 </script>
 
 <svelte:head
 	><title>Articles | Dokter Metabolik</title><meta
 		name="description"
 		content="Artikel tentang kesehatan metabolik dan pola hidup sehat."
-	/><link rel="canonical" href="https://doktermetabolik.id/articles" /></svelte:head
+	/><link rel="canonical" href={siteUrl + '/articles/'} /></svelte:head
 >
 <EditorialPage
 	eyebrow="PUBLIKASI"

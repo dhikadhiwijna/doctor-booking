@@ -5,11 +5,15 @@
 	import { _ } from 'svelte-i18n';
 	import { Button } from '$lib/components/ui/button/index.js';
 	import LanguageSwitcher from '$lib/components/LanguageSwitcher.svelte';
+	import { appPath } from '$lib/site.js';
 	let menuOpen = $state(false);
 </script>
 
 <header class="mx-auto flex h-18 max-w-6xl items-center justify-between px-5 sm:h-22 sm:px-8">
-	<a class="brand-link inline-flex items-center gap-2.5" href="/" aria-label={$_('brand.home')}
+	<a
+		class="brand-link inline-flex items-center gap-2.5"
+		href={appPath('/')}
+		aria-label={$_('brand.home')}
 		><span
 			class="grid size-8 place-items-center rounded-full bg-coral font-serif text-sm italic text-paper"
 			>dm</span
@@ -19,10 +23,10 @@
 		class="hidden items-center gap-8 text-sm text-ink/70 md:flex"
 		aria-label={$_('navigation.primary')}
 	>
-		<a class="nav-link" href="/articles">{$_('navigation.articles')}</a><a
+		<a class="nav-link" href={appPath('/articles')}>{$_('navigation.articles')}</a><a
 			class="nav-link"
-			href="/topics">{$_('navigation.topics')}</a
-		><a class="nav-link" href="/about">{$_('navigation.about')}</a>
+			href={appPath('/topics')}>{$_('navigation.topics')}</a
+		><a class="nav-link" href={appPath('/about')}>{$_('navigation.about')}</a>
 	</nav>
 	<div class="flex items-center gap-3">
 		<LanguageSwitcher />
@@ -49,7 +53,7 @@
 			{/key}
 		</Button>
 		<Button
-			href="/articles"
+			href={appPath('/articles')}
 			variant="ghost"
 			size="icon"
 			class="hidden md:inline-flex"
@@ -75,19 +79,19 @@
 	>
 		<a
 			class="nav-link block rounded-lg px-4 py-3 text-sm font-medium hover:bg-sage"
-			href="/articles"
+			href={appPath('/articles')}
 			onclick={() => (menuOpen = false)}>{$_('navigation.articles')}</a
 		><a
 			class="nav-link block rounded-lg px-4 py-3 text-sm font-medium hover:bg-sage"
-			href="/topics"
+			href={appPath('/topics')}
 			onclick={() => (menuOpen = false)}>{$_('navigation.topics')}</a
 		><a
 			class="nav-link block rounded-lg px-4 py-3 text-sm font-medium hover:bg-sage"
-			href="/about"
+			href={appPath('/about')}
 			onclick={() => (menuOpen = false)}>{$_('navigation.about')}</a
 		><a
 			class="nav-link block rounded-lg px-4 py-3 text-sm font-medium hover:bg-sage"
-			href="/contact"
+			href={appPath('/contact')}
 			onclick={() => (menuOpen = false)}>{$_('navigation.contact')}</a
 		>
 	</nav>{/if}

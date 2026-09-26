@@ -3,6 +3,7 @@
 	import AppHeader from './AppHeader.svelte';
 	import PageNavigation from './PageNavigation.svelte';
 	import { Button } from '$lib/components/ui/button/index.js';
+	import { appPath } from '$lib/site.js';
 	let {
 		eyebrow,
 		title,
@@ -32,7 +33,7 @@
 	<p class="mt-7 max-w-2xl text-xl leading-7 text-ink/70">{description}</p>
 	{#if links.length}<ul class="mt-12 grid gap-3 p-0">
 			{#each links as link (link.label)}<li class="list-none">
-					<Button href={link.href} variant="outline" class="w-full justify-start"
+					<Button href={appPath(link.href)} variant="outline" class="w-full justify-start"
 						>{link.label}</Button
 					>
 				</li>{/each}

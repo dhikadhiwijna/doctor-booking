@@ -3,6 +3,10 @@ import adapter from '@sveltejs/adapter-static';
 import { sveltekit } from '@sveltejs/kit/vite';
 import { defineConfig } from 'vite';
 
+const isGitHubPages =
+	(globalThis as { process?: { env?: Record<string, string | undefined> } }).process?.env
+		?.GITHUB_ACTIONS === 'true';
+
 export default defineConfig({
 	plugins: [
 		tailwindcss(),
@@ -14,6 +18,9 @@ export default defineConfig({
 			},
 
 			adapter: adapter(),
+			paths: {
+				base: isGitHubPages ? '/doctor-booking' : '',
+			},
 		}),
 	],
 });

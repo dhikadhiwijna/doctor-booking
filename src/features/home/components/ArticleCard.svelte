@@ -1,6 +1,7 @@
 <script lang="ts">
 	import { ArrowUpRight } from '@lucide/svelte';
 	import { Button } from '$lib/components/ui/button/index.js';
+	import { appPath } from '$lib/site.js';
 	import {
 		Card,
 		CardContent,
@@ -27,7 +28,7 @@
 			class:sage={article.tone === 'sage'}
 			class:sand={article.tone === 'sand'}
 			class="relative block aspect-16/10 overflow-hidden rounded-xl"
-			href={article.href}
+			href={appPath(article.href)}
 			aria-label={'Baca artikel: ' + article.title}
 		>
 			<span class="absolute left-5 top-4 z-10 font-serif text-xl text-paper">0{number}</span><span
@@ -38,12 +39,12 @@
 		><CardDescription class="text-xs font-bold tracking-[.14em] text-coral"
 			>{article.category}</CardDescription
 		><CardTitle class="scroll-m-20 pt-2 font-serif text-2xl font-medium tracking-tight text-ink"
-			><a class="transition-colors hover:text-coral" href={article.href}>{article.title}</a
+			><a class="transition-colors hover:text-coral" href={appPath(article.href)}>{article.title}</a
 			></CardTitle
 		></CardHeader
 	><CardFooter class="flex items-center justify-between border-t px-1 pb-1 pt-4 text-xs text-ink/60"
 		><time datetime="2026-07-12">{article.date}</time><Button
-			href={article.href}
+			href={appPath(article.href)}
 			variant="ghost"
 			size="icon-sm"
 			aria-label={'Baca artikel: ' + article.title}><ArrowUpRight aria-hidden="true" /></Button

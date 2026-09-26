@@ -4,8 +4,8 @@
 	import { Button } from '$lib/components/ui/button/index.js';
 	import AppFooter from '$lib/components/AppFooter.svelte';
 	import AppHeader from '$lib/components/AppHeader.svelte';
-	import PageNavigation from '$lib/components/PageNavigation.svelte';
 	import ArticleCard from './components/ArticleCard.svelte';
+	import { appPath } from '$lib/site.js';
 	const articles = [
 		{
 			category: 'INSULIN RESISTANCE',
@@ -38,7 +38,6 @@
 </script>
 
 <AppHeader />
-<div class="mx-auto max-w-6xl px-5 sm:px-8"><PageNavigation /></div>
 <main>
 	<section
 		class="mx-auto grid max-w-6xl items-center gap-10 px-5 pb-18 pt-12 sm:px-8 lg:grid-cols-2 lg:py-20"
@@ -53,7 +52,10 @@
 			<p class="mt-6 max-w-md text-lg leading-7 text-ink/70">
 				{$_('home.description')}
 			</p>
-			<Button href="/articles" size="lg" class="mt-7 bg-[#21352d] text-[#fbfaf6] hover:bg-[#2f4c40]"
+			<Button
+				href={appPath('/articles')}
+				size="lg"
+				class="mt-7 bg-[#21352d] text-[#fbfaf6] hover:bg-[#2f4c40]"
 				>{$_('home.articlesCta')} <ArrowRight aria-hidden="true" /></Button
 			>
 		</div>
@@ -86,7 +88,7 @@
 					{$_('home.latestTitleFirst')}<br />{$_('home.latestTitleSecond')}
 				</h2>
 			</div>
-			<Button href="/articles" variant="link" class="w-fit"
+			<Button href={appPath('/articles')} variant="link" class="w-fit"
 				>{$_('home.allArticles')} <ArrowRight aria-hidden="true" /></Button
 			>
 		</div>
@@ -108,7 +110,7 @@
 				{#each topics as topic, i (topic)}<li>
 						<a
 							class="group flex items-center gap-4 border-b border-white/20 py-5 font-serif text-xl transition-colors hover:text-[#e8ad77]"
-							href="/topics"
+							href={appPath('/topics')}
 							><span class="font-sans text-xs text-white/60">0{i + 1}</span><span class="flex-1"
 								>{topic}</span
 							><ChevronRight
@@ -134,7 +136,7 @@
 			<div>
 				<p class="text-lg leading-7 text-ink/70">{$_('home.contactDescription')}</p>
 				<Button
-					href="/contact"
+					href={appPath('/contact')}
 					size="lg"
 					class="mt-5 bg-[#21352d] text-[#fbfaf6] hover:bg-[#2f4c40]"
 					><Mail aria-hidden="true" />{$_('home.contactCta')}</Button

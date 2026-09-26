@@ -1,6 +1,7 @@
 <script lang="ts">
 	import { Mail } from '@lucide/svelte';
 	import { _ } from 'svelte-i18n';
+	import { appPath } from '$lib/site.js';
 	const year = new Date().getFullYear();
 </script>
 
@@ -10,7 +11,7 @@
 			<div class="max-w-sm">
 				<a
 					class="brand-link inline-flex items-center gap-2.5"
-					href="/"
+					href={appPath('/')}
 					aria-label={$_('brand.home')}
 					><span
 						class="grid size-8 place-items-center rounded-full bg-coral font-serif text-sm italic text-paper"
@@ -23,9 +24,9 @@
 			<div>
 				<h2 class="text-sm font-semibold tracking-tight">{$_('footer.explore')}</h2>
 				<nav class="mt-4 grid gap-3 text-sm text-white/70" aria-label={$_('navigation.primary')}>
-					<a class="nav-link w-fit" href="/articles">{$_('navigation.articles')}</a>
-					<a class="nav-link w-fit" href="/topics">{$_('navigation.topics')}</a>
-					<a class="nav-link w-fit" href="/about">{$_('navigation.about')}</a>
+					<a class="nav-link w-fit" href={appPath('/articles')}>{$_('navigation.articles')}</a>
+					<a class="nav-link w-fit" href={appPath('/topics')}>{$_('navigation.topics')}</a>
+					<a class="nav-link w-fit" href={appPath('/about')}>{$_('navigation.about')}</a>
 				</nav>
 			</div>
 			<div>
