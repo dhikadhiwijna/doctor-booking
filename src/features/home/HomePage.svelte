@@ -1,5 +1,6 @@
 <script lang="ts">
 	import { ArrowRight, ChevronRight, Mail } from '@lucide/svelte';
+	import { _ } from 'svelte-i18n';
 	import { Button } from '$lib/components/ui/button/index.js';
 	import AppFooter from '$lib/components/AppFooter.svelte';
 	import AppHeader from '$lib/components/AppHeader.svelte';
@@ -27,12 +28,12 @@
 			tone: 'sand' as const,
 		},
 	];
-	const topics = [
-		'Kesehatan metabolik',
-		'Pola hidup sehat',
-		'Tubuh saat menua',
-		'Pola makan & gerak',
-	];
+	const topics = $derived([
+		$_('home.topics.metabolic'),
+		$_('home.topics.lifestyle'),
+		$_('home.topics.aging'),
+		$_('home.topics.foodAndMovement'),
+	]);
 </script>
 
 <AppHeader />
@@ -41,18 +42,17 @@
 		class="mx-auto grid max-w-6xl items-center gap-10 px-5 pb-18 pt-12 sm:px-8 lg:grid-cols-2 lg:py-20"
 	>
 		<div class="rise-in">
-			<p class="text-xs font-bold tracking-[.16em] text-coral">RUANG BELAJAR KESEHATAN</p>
+			<p class="text-xs font-bold tracking-[.16em] text-coral">{$_('home.eyebrow')}</p>
 			<h1
 				class="mt-5 scroll-m-20 font-serif text-5xl font-medium tracking-tight text-balance sm:text-6xl lg:text-7xl"
 			>
-				Kesehatan metabolik,<br /><em class="text-[#899365]">dibahas dengan jernih.</em>
+				{$_('home.title')}<br /><em class="text-[#899365]">{$_('home.titleEmphasis')}</em>
 			</h1>
 			<p class="mt-6 max-w-md text-lg leading-7 text-ink/70">
-				Catatan kesehatan untuk membantu Anda memahami tubuh, membuat pilihan yang lebih baik, dan
-				menjalani hidup dengan lebih utuh.
+				{$_('home.description')}
 			</p>
 			<Button href="/articles" size="lg" class="mt-7 bg-[#21352d] text-[#fbfaf6] hover:bg-[#2f4c40]"
-				>Jelajahi artikel <ArrowRight aria-hidden="true" /></Button
+				>{$_('home.articlesCta')} <ArrowRight aria-hidden="true" /></Button
 			>
 		</div>
 		<div class="rise-in-delay relative mx-auto min-h-72 w-full max-w-md" aria-hidden="true">
@@ -61,32 +61,31 @@
 			></span><span
 				class="float absolute bottom-0 right-8 grid size-64 place-items-center rounded-[49%_51%_55%_45%] bg-[#d9a64d] text-paper"
 				><span class="font-serif text-3xl leading-none tracking-tight"
-					>Kenali tubuh.<br />Rawat hidup.</span
+					>{$_('home.artworkFirst')}<br />{$_('home.artworkSecond')}</span
 				></span
 			>
 		</div>
 	</section>
 	<section class="bg-sage px-5 py-16 sm:px-8">
 		<div class="mx-auto grid max-w-6xl gap-5 md:grid-cols-[1fr_2fr]">
-			<p class="text-xs font-bold tracking-[.16em] text-coral">MENGAPA DOKTER METABOLIK</p>
+			<p class="text-xs font-bold tracking-[.16em] text-coral">{$_('home.whyEyebrow')}</p>
 			<p class="font-serif text-3xl leading-tight tracking-tight text-balance sm:text-4xl">
-				Di tengah banyaknya saran kesehatan, kami percaya informasi yang baik perlu hadir dengan
-				konteks, kepedulian, dan bahasa yang dapat dipahami.
+				{$_('home.whyDescription')}
 			</p>
 		</div>
 	</section>
 	<section class="mx-auto max-w-6xl px-5 py-18 sm:px-8">
 		<div class="flex flex-col justify-between gap-5 sm:flex-row sm:items-end">
 			<div>
-				<p class="text-xs font-bold tracking-[.16em] text-coral">BACAAN TERBARU</p>
+				<p class="text-xs font-bold tracking-[.16em] text-coral">{$_('home.latestEyebrow')}</p>
 				<h2
 					class="mt-4 scroll-m-20 font-serif text-4xl font-medium tracking-tight text-balance sm:text-5xl"
 				>
-					Untuk dipahami,<br />bukan sekadar dibaca.
+					{$_('home.latestTitleFirst')}<br />{$_('home.latestTitleSecond')}
 				</h2>
 			</div>
 			<Button href="/articles" variant="link" class="w-fit"
-				>Lihat semua <ArrowRight aria-hidden="true" /></Button
+				>{$_('home.allArticles')} <ArrowRight aria-hidden="true" /></Button
 			>
 		</div>
 		<div class="mt-10 grid gap-6 md:grid-cols-3">
@@ -96,11 +95,11 @@
 	<section class="bg-[#15251d] px-5 py-16 text-[#fbfaf6] sm:px-8">
 		<div class="mx-auto flex max-w-6xl flex-col justify-between gap-10 md:flex-row">
 			<div>
-				<p class="text-xs font-bold tracking-[.16em] text-[#e5aa77]">TEMUKAN TOPIK</p>
+				<p class="text-xs font-bold tracking-[.16em] text-[#e5aa77]">{$_('home.topicsEyebrow')}</p>
 				<h2
 					class="mt-4 scroll-m-20 font-serif text-4xl font-medium tracking-tight text-balance sm:text-5xl"
 				>
-					Mulai dari yang<br />paling dekat.
+					{$_('home.topicsTitleFirst')}<br />{$_('home.topicsTitleSecond')}
 				</h2>
 			</div>
 			<ul class="w-full max-w-xl list-none p-0">
@@ -122,20 +121,21 @@
 	<section class="bg-[#f2d9ca] px-5 py-16 dark:bg-[#26382f] sm:px-8">
 		<div class="mx-auto flex max-w-6xl flex-col justify-between gap-8 md:flex-row md:items-center">
 			<div>
-				<p class="text-xs font-bold tracking-[.16em] text-coral">TETAP TERHUBUNG</p>
+				<p class="text-xs font-bold tracking-[.16em] text-coral">{$_('home.contactEyebrow')}</p>
 				<h2
 					class="mt-4 scroll-m-20 font-serif text-4xl font-medium tracking-tight text-balance sm:text-5xl"
 				>
-					Pengetahuan baik,<br /><em class="text-[#899365]">langsung ke email Anda.</em>
+					{$_('home.contactTitle')}<br /><em class="text-[#899365]">{$_('home.contactEmphasis')}</em
+					>
 				</h2>
 			</div>
 			<div>
-				<p class="text-lg leading-7 text-ink/70">Kabar terbaru, dikirim sewajarnya.</p>
+				<p class="text-lg leading-7 text-ink/70">{$_('home.contactDescription')}</p>
 				<Button
 					href="/contact"
 					size="lg"
 					class="mt-5 bg-[#21352d] text-[#fbfaf6] hover:bg-[#2f4c40]"
-					><Mail aria-hidden="true" />Hubungi kami</Button
+					><Mail aria-hidden="true" />{$_('home.contactCta')}</Button
 				>
 			</div>
 		</div>

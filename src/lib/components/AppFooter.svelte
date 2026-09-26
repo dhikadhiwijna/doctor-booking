@@ -6,10 +6,7 @@
 <footer
 	class="mx-auto grid max-w-6xl gap-5 px-5 py-10 text-sm text-ink/65 sm:grid-cols-[1fr_2fr_1fr] sm:px-8"
 >
-	<a
-		class="inline-flex items-center gap-2.5 text-ink"
-		href="/"
-		aria-label="Dokter Metabolik, beranda"
+	<a class="inline-flex items-center gap-2.5 text-ink" href="/" aria-label={$_('brand.home')}
 		><span
 			class="grid size-8 place-items-center rounded-full bg-coral font-serif text-sm italic text-paper"
 			>dm</span

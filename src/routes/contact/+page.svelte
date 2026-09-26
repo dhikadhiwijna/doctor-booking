@@ -1,16 +1,17 @@
 <script lang="ts">
 	import EditorialPage from '$lib/components/EditorialPage.svelte';
+	import { _ } from 'svelte-i18n';
 </script>
 
 <svelte:head
-	><title>Contact | Dokter Metabolik</title><meta
+	><title>{$_('meta.contact.title')}</title><meta
 		name="description"
-		content="Hubungi Dokter Metabolik untuk pertanyaan seputar publikasi kesehatan."
+		content={$_('meta.contact.description')}
 	/><link rel="canonical" href="https://doktermetabolik.id/contact" /></svelte:head
 >
 <EditorialPage
-	eyebrow="KONTAK"
-	title="Mari tetap terhubung."
-	description="Untuk pertanyaan atau tanggapan tentang publikasi kami, silakan kirim email."
+	eyebrow={$_('contactPage.eyebrow')}
+	title={$_('contactPage.title')}
+	description={$_('contactPage.description')}
 	links={[{ label: 'halo@doktermetabolik.id', href: 'mailto:halo@doktermetabolik.id' }]}
 />

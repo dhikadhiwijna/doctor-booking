@@ -7,13 +7,16 @@
 </script>
 
 <header class="mx-auto flex h-18 max-w-6xl items-center justify-between px-5 sm:h-22 sm:px-8">
-	<a class="inline-flex items-center gap-2.5" href="/" aria-label="Dokter Metabolik, beranda"
+	<a class="inline-flex items-center gap-2.5" href="/" aria-label={$_('brand.home')}
 		><span
 			class="grid size-8 place-items-center rounded-full bg-coral font-serif text-sm italic text-paper"
 			>dm</span
 		><span class="text-xs font-bold leading-none tracking-tight">dokter<br />metabolik</span></a
 	>
-	<nav class="hidden items-center gap-8 text-sm text-ink/70 md:flex" aria-label="Navigasi utama">
+	<nav
+		class="hidden items-center gap-8 text-sm text-ink/70 md:flex"
+		aria-label={$_('navigation.primary')}
+	>
 		<a class="transition-colors hover:text-coral" href="/articles">{$_('navigation.articles')}</a><a
 			class="transition-colors hover:text-coral"
 			href="/topics">{$_('navigation.topics')}</a
@@ -40,7 +43,7 @@
 {#if menuOpen}<nav
 		id="mobile-navigation"
 		class="absolute inset-x-4 top-16 z-20 rounded-xl border bg-paper p-3 shadow-lg md:hidden"
-		aria-label="Navigasi mobile"
+		aria-label={$_('navigation.mobile')}
 	>
 		<a
 			class="block rounded-lg px-4 py-3 text-sm font-medium hover:bg-sage"
