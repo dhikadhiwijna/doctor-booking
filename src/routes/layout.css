@@ -1,0 +1,118 @@
+@import 'tailwindcss';
+@import '@fontsource-variable/inter';
+@custom-variant dark (&:is(.dark *));
+
+@theme {
+	--color-ink: #21352d;
+	--color-paper: #fbfaf6;
+	--color-sage: #e7ede0;
+	--color-coral: #c96652;
+	--color-background: #fbfaf6;
+	--color-foreground: #21352d;
+	--color-primary: #21352d;
+	--color-primary-foreground: #fbfaf6;
+	--color-secondary: #e7ede0;
+	--color-secondary-foreground: #21352d;
+	--color-muted: #edf0e9;
+	--color-muted-foreground: #65736d;
+	--color-border: #dfe5dc;
+	--color-input: #dfe5dc;
+	--color-ring: #c96652;
+	--color-destructive: #b42318;
+	--font-serif: Georgia, Cambria, 'Times New Roman', serif;
+}
+
+html.dark {
+	--color-ink: #e8eee7;
+	--color-paper: #101915;
+	--color-sage: #1c2a24;
+	--color-coral: #f09a82;
+	--color-background: #101915;
+	--color-foreground: #e8eee7;
+	--color-primary: #e8eee7;
+	--color-primary-foreground: #101915;
+	--color-secondary: #26382f;
+	--color-secondary-foreground: #e8eee7;
+	--color-muted: #1b2923;
+	--color-muted-foreground: #adbbb3;
+	--color-border: #31463a;
+	--color-input: #31463a;
+	--color-ring: #f09a82;
+}
+
+@layer base {
+	* {
+		@apply border-border;
+	}
+	html {
+		@apply bg-paper text-ink;
+		scroll-behavior: smooth;
+	}
+	body {
+		@apply m-0 min-w-80 bg-paper font-sans antialiased;
+	}
+	a {
+		@apply outline-none focus-visible:ring-2 focus-visible:ring-coral focus-visible:ring-offset-2;
+	}
+}
+
+@keyframes rise-in {
+	from {
+		opacity: 0;
+		transform: translateY(16px);
+	}
+	to {
+		opacity: 1;
+		transform: translateY(0);
+	}
+}
+@keyframes float {
+	0%,
+	100% {
+		transform: translateY(0) rotate(-8deg);
+	}
+	50% {
+		transform: translateY(-10px) rotate(-5deg);
+	}
+}
+.rise-in {
+	animation: rise-in 0.65s both cubic-bezier(0.2, 0.7, 0.2, 1);
+}
+.rise-in-delay {
+	animation: rise-in 0.65s 0.14s both cubic-bezier(0.2, 0.7, 0.2, 1);
+}
+.float {
+	animation: float 5s ease-in-out infinite;
+}
+::view-transition-old(root) {
+	animation: page-leave 150ms ease-out both;
+}
+::view-transition-new(root) {
+	animation: page-enter 220ms ease-in both;
+}
+@keyframes page-leave {
+	to {
+		opacity: 0;
+		transform: translateY(4px);
+	}
+}
+@keyframes page-enter {
+	from {
+		opacity: 0;
+		transform: translateY(-4px);
+	}
+}
+@media (prefers-reduced-motion: reduce) {
+	*,
+	::before,
+	::after {
+		scroll-behavior: auto !important;
+		animation-duration: 0.01ms !important;
+		animation-iteration-count: 1 !important;
+		transition-duration: 0.01ms !important;
+	}
+	::view-transition-old(root),
+	::view-transition-new(root) {
+		animation: none;
+	}
+}
