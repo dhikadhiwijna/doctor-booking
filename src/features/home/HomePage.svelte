@@ -4,6 +4,7 @@
 	import { Button } from '$lib/components/ui/button/index.js';
 	import AppFooter from '$lib/components/AppFooter.svelte';
 	import AppHeader from '$lib/components/AppHeader.svelte';
+	import PageNavigation from '$lib/components/PageNavigation.svelte';
 	import ArticleCard from './components/ArticleCard.svelte';
 	const articles = [
 		{
@@ -37,6 +38,7 @@
 </script>
 
 <AppHeader />
+<div class="mx-auto max-w-6xl px-5 sm:px-8"><PageNavigation /></div>
 <main>
 	<section
 		class="mx-auto grid max-w-6xl items-center gap-10 px-5 pb-18 pt-12 sm:px-8 lg:grid-cols-2 lg:py-20"

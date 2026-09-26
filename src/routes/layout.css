@@ -56,6 +56,34 @@ html.dark {
 	}
 }
 
+@layer components {
+	.brand-link {
+		@apply transition-transform duration-200 ease-out motion-safe:hover:-translate-y-px motion-safe:active:scale-[0.98];
+	}
+	.nav-link {
+		@apply relative transition-colors duration-200 ease-out hover:text-coral;
+	}
+	@media (min-width: 48rem) {
+		.nav-link::after {
+			position: absolute;
+			right: 0;
+			bottom: -0.35rem;
+			left: 0;
+			height: 1px;
+			content: '';
+			background: currentColor;
+			transform: scaleX(0);
+			transform-origin: right;
+			transition: transform 180ms ease-out;
+		}
+		.nav-link:hover::after,
+		.nav-link:focus-visible::after {
+			transform: scaleX(1);
+			transform-origin: left;
+		}
+	}
+}
+
 @keyframes rise-in {
 	from {
 		opacity: 0;

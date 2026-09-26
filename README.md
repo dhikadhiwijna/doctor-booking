@@ -11,6 +11,12 @@ npm run dev
 
 Gunakan `npm run check` untuk pemeriksaan Svelte dan `npm run build` untuk membuat build produksi.
 
+## Deploy static
+
+`npm run build` menghasilkan situs statis sepenuhnya di folder `build/`, termasuk setiap halaman artikel yang tersedia. Upload **isi** folder tersebut ke document root Hostinger untuk `doktermetabolik.id`.
+
+Workflow [deploy-static.yml](./.github/workflows/deploy-static.yml) juga men-deploy setiap push ke branch `main` ke GitHub Pages. Aktifkan **Settings → Pages → Source: GitHub Actions** pada repository sebelum menggunakan workflow tersebut. Untuk domain produksi, pilih satu host sebagai sumber utama agar canonical URL dan SEO tidak terbagi.
+
 ## Prinsip implementasi
 
 - **Mobile-first:** mulai dari layar kecil; tingkatkan layout dengan breakpoint `sm`, `md`, dan `lg` hanya saat konten membutuhkannya.

@@ -1,5 +1,6 @@
 <script lang="ts">
 	import EditorialPage from '$lib/components/EditorialPage.svelte';
+	import { _ } from 'svelte-i18n';
 	let { data }: { data: { slug: string } } = $props();
 	const articles: Record<string, { title: string; description: string }> = {
 		'resistensi-insulin': {
@@ -37,4 +38,6 @@
 	title={article.title}
 	description={article.description}
 	links={[{ label: 'Kembali ke semua artikel', href: '/articles' }]}
+	breadcrumbs={[{ label: $_('navigation.articles'), href: '/articles' }]}
+	backHref="/articles"
 />

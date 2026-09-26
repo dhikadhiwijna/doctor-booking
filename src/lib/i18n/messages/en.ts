@@ -8,12 +8,21 @@ export default {
 		contact: 'Contact',
 		menu: 'Menu',
 		search: 'Search articles',
+		home: 'Home',
+		back: 'Back',
+		breadcrumb: 'Breadcrumb',
 	},
 	brand: { home: 'Dokter Metabolik, home' },
 	language: { label: 'Language', indonesian: 'Indonesian', english: 'English' },
+	appearance: { enableDark: 'Enable dark mode', enableLight: 'Enable light mode' },
 	footer: {
+		tagline: 'Clear health knowledge for better everyday decisions.',
+		explore: 'Explore',
+		contact: 'Contact us',
+		email: 'Email',
 		disclaimer:
 			'The information on this site is educational and does not replace professional medical consultation.',
+		copyright: 'All rights reserved.',
 	},
 	home: {
 		eyebrow: 'HEALTH LEARNING SPACE',

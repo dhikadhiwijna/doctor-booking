@@ -6,12 +6,7 @@ import Group from './attachment-group.svelte';
 import Media from './attachment-media.svelte';
 import Title from './attachment-title.svelte';
 import Trigger from './attachment-trigger.svelte';
-import Root, {
-	attachmentVariants,
-	type AttachmentOrientation,
-	type AttachmentSize,
-	type AttachmentState,
-} from './attachment.svelte';
+import Root from './attachment.svelte';
 
 export {
 	Root,
@@ -23,11 +18,6 @@ export {
 	Actions,
 	Action,
 	Trigger,
-	attachmentVariants,
-	type AttachmentSize,
-	type AttachmentOrientation,
-	type AttachmentState,
-	//
 	Root as Attachment,
 	Group as AttachmentGroup,
 	Media as AttachmentMedia,
@@ -38,3 +28,10 @@ export {
 	Action as AttachmentAction,
 	Trigger as AttachmentTrigger,
 };
+
+export {
+	type AttachmentState,
+	type AttachmentOrientation,
+	type AttachmentSize,
+	attachmentVariants,
+} from './attachment.svelte';

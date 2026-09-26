@@ -8,12 +8,21 @@ export default {
 		contact: 'Kontak',
 		menu: 'Menu',
 		search: 'Cari artikel',
+		home: 'Beranda',
+		back: 'Kembali',
+		breadcrumb: 'Jejak navigasi',
 	},
 	brand: { home: 'Dokter Metabolik, beranda' },
 	language: { label: 'Bahasa', indonesian: 'Indonesia', english: 'English' },
+	appearance: { enableDark: 'Aktifkan mode gelap', enableLight: 'Aktifkan mode terang' },
 	footer: {
+		tagline: 'Pengetahuan kesehatan yang jernih untuk keputusan sehari-hari yang lebih baik.',
+		explore: 'Jelajahi',
+		contact: 'Hubungi kami',
+		email: 'Email',
 		disclaimer:
 			'Informasi di situs ini bersifat edukatif dan tidak menggantikan konsultasi medis profesional.',
+		copyright: 'Hak cipta dilindungi.',
 	},
 	home: {
 		eyebrow: 'RUANG BELAJAR KESEHATAN',
