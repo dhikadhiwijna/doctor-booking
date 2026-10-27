@@ -22,18 +22,20 @@
 </script>
 
 <AppHeader />
-<main class="mx-auto min-h-[65vh] max-w-4xl px-5 py-16 sm:px-8 sm:py-24">
+<main id="main-content" aria-label={eyebrow} class="page-frame min-h-[65vh] py-12 sm:py-20">
 	<PageNavigation breadcrumbs={[...breadcrumbs, { label: title }]} {backHref} />
-	<p class="text-xs font-bold tracking-[.16em] text-coral">{eyebrow}</p>
 	<h1
-		class="mt-5 scroll-m-20 font-serif text-5xl font-medium tracking-tight text-balance sm:text-6xl"
+		class="mt-8 max-w-3xl scroll-m-20 text-4xl font-semibold tracking-tight text-balance sm:text-5xl"
 	>
 		{title}
 	</h1>
-	<p class="mt-7 max-w-2xl text-xl leading-7 text-ink/70">{description}</p>
-	{#if links.length}<ul class="mt-12 grid gap-3 p-0">
+	<p class="mt-7 max-w-2xl text-xl leading-8 text-muted-foreground">{description}</p>
+	{#if links.length}<ul class="mt-10 grid max-w-2xl gap-3 p-0">
 			{#each links as link (link.label)}<li class="list-none">
-					<Button href={appPath(link.href)} variant="outline" class="w-full justify-start"
+					<Button
+						href={appPath(link.href)}
+						variant="secondary"
+						class="h-auto min-h-14 w-full justify-start rounded-xl px-5 py-4 text-left whitespace-normal"
 						>{link.label}</Button
 					>
 				</li>{/each}

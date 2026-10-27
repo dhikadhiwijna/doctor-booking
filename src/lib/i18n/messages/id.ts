@@ -1,4 +1,78 @@
-export default {
+﻿export default {
+	care: {
+		titleFirst: 'Sehat dimulai',
+		titleSecond: 'dari sini.',
+		description:
+			'Kenali tubuh Anda. Temukan ritme hidup yang lebih sehat. Ambil langkah untuk kesehatan metabolik, dengan ruang untuk bercerita.',
+		cta: 'Ajukan konsultasi',
+		read: 'Jelajahi artikel',
+		note: 'Mulai percakapan, tanpa terburu-buru.',
+		imageAlt: 'Seorang dokter memegang ponsel dengan stetoskop di lehernya',
+		imageCaption: 'Cerita Anda, awal yang baik.',
+		imageCredit: 'Foto: Unsplash',
+		start: 'Mari mulai',
+		skip: 'Lewati ke konten',
+		closeMenu: 'Tutup menu',
+		principles: {
+			understand: 'Kenali kesehatan metabolik',
+			habits: 'Bangun kebiasaan sehari-hari',
+			personal: 'Ruang untuk pertanyaan Anda',
+		},
+		consultationTitle: 'Mari bicara tentang Anda.',
+		consultationDescription:
+			'Setiap perjalanan sehat punya titik awal. Ceritakan kebutuhan Anda dan ajukan konsultasi melalui email.',
+		steps: {
+			choose: {
+				title: 'Pilih topik Anda',
+				description: 'Mulai dari hal yang paling berarti bagi Anda saat ini.',
+			},
+			email: {
+				title: 'Kirim permintaan',
+				description: 'Kami siapkan email dengan topik pilihan Anda.',
+			},
+			confirm: {
+				title: 'Tentukan langkah berikutnya',
+				description: 'Tim akan mengonfirmasi ketersediaan dan detail melalui email.',
+			},
+		},
+		request: {
+			title: 'Langkah pertama Anda',
+			description: 'Apa yang ingin Anda diskusikan?',
+			topicLabel: 'Topik konsultasi',
+			topics: {
+				metabolic: 'Kesehatan metabolik',
+				nutrition: 'Pola makan dan kebiasaan',
+				general: 'Belum tahu harus mulai dari mana',
+			},
+			subject: 'Permintaan konsultasi — Dokter Metabolik',
+			body: 'Halo Dokter Metabolik,\n\nSaya ingin mengajukan konsultasi tentang: {topic}.\n\nMohon informasi jadwal yang tersedia dan detail konsultasi.\n\nTerima kasih.',
+			send: 'Lanjutkan ke email',
+			note: 'Membuka aplikasi email Anda. Janji temu dikonfirmasi setelah tim membalas.',
+		},
+		readingTitle: 'Lebih paham, lebih terarah.',
+		readingDescription: 'Kenali hubungan antara tubuh dan kebiasaan sehari-hari Anda.',
+		articles: {
+			insulin: {
+				category: 'Kesehatan metabolik',
+				title: 'Memahami resistensi insulin',
+				alt: 'Stetoskop di samping laptop di atas meja',
+			},
+			nutrition: {
+				category: 'Pola makan',
+				title: 'Makan dengan lebih sadar',
+				alt: 'Aneka sayuran segar dan sayuran berdaun hijau',
+			},
+			aging: {
+				category: 'Gerak dan usia',
+				title: 'Merawat tubuh seiring usia',
+				alt: 'Seseorang menaiki tangga luar ruangan dengan sepatu olahraga',
+			},
+		},
+		closingTitle: 'Beri ruang untuk sehat.',
+		closingDescription: 'Tak perlu punya semua jawaban untuk mengambil langkah pertama.',
+		photoCredits: 'Fotografi',
+		photoSource: 'Fotografi kesehatan dan keseharian dari Unsplash.',
+	},
 	navigation: {
 		primary: 'Navigasi utama',
 		mobile: 'Navigasi mobile',

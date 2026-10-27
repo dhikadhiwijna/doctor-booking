@@ -1,22 +1,22 @@
 <script lang="ts">
-	import { Mail } from '@lucide/svelte';
+	import { Mail, Plus } from '@lucide/svelte';
 	import { _ } from 'svelte-i18n';
 	import { appPath } from '$lib/site.js';
 	const year = new Date().getFullYear();
 </script>
 
 <footer class="bg-[#15251d] text-[#fbfaf6]">
-	<div class="mx-auto max-w-6xl px-5 py-12 sm:px-8 sm:py-16">
+	<div class="page-frame py-12 sm:py-16">
 		<div class="grid gap-10 sm:grid-cols-2 lg:grid-cols-[1.4fr_1fr_1fr]">
 			<div class="max-w-sm">
 				<a
 					class="brand-link inline-flex items-center gap-2.5"
 					href={appPath('/')}
 					aria-label={$_('brand.home')}
-					><span
-						class="grid size-8 place-items-center rounded-full bg-coral font-serif text-sm italic text-paper"
-						>dm</span
-					><span class="text-xs font-bold leading-none tracking-tight">dokter<br />metabolik</span
+					><span class="grid size-10 place-items-center rounded-xl bg-white/10 text-white"
+						><Plus class="size-7" strokeWidth={3} aria-hidden="true" /></span
+					><span class="text-base font-semibold leading-tight tracking-tight"
+						>Dokter<br />Metabolik.</span
 					></a
 				>
 				<p class="mt-5 leading-7 text-white/70">{$_('footer.tagline')}</p>
@@ -38,11 +38,14 @@
 				>
 			</div>
 		</div>
-		<div
-			class="mt-12 grid gap-4 border-t border-white/15 pt-6 text-xs leading-5 text-white/55 sm:grid-cols-[1fr_auto]"
-		>
+		<div class="mt-12 grid gap-4 text-sm leading-6 text-white/70 sm:grid-cols-[1fr_auto]">
 			<p>{$_('footer.disclaimer')}</p>
 			<p>© {year} Dokter Metabolik. {$_('footer.copyright')}</p>
+			<p>
+				<a class="underline underline-offset-4 hover:text-white" href="https://unsplash.com/"
+					>{$_('care.imageCredit')}</a
+				>
+			</p>
 		</div>
 	</div>
 </footer>

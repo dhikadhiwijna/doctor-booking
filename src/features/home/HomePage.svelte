@@ -1,147 +1,165 @@
 <script lang="ts">
-	import { ArrowRight, ChevronRight, Mail } from '@lucide/svelte';
+	import { onMount } from 'svelte';
+	import { ArrowDown, ArrowRight, Check, MessageCircle, MoveUpRight } from '@lucide/svelte';
 	import { _ } from 'svelte-i18n';
 	import { Button } from '$lib/components/ui/button/index.js';
 	import AppFooter from '$lib/components/AppFooter.svelte';
 	import AppHeader from '$lib/components/AppHeader.svelte';
+	import ResponsiveImage from '$lib/components/media/ResponsiveImage.svelte';
 	import ArticleCard from './components/ArticleCard.svelte';
+	import ConsultationRequest from './components/ConsultationRequest.svelte';
 	import { appPath } from '$lib/site.js';
+	import consultation from './assets/consultation.jpg';
+	import nutrition from './assets/nutrition.jpg';
+	import movement from './assets/movement.jpg';
+	import health from './assets/health.jpg';
 	const articles = [
-		{
-			category: 'INSULIN RESISTANCE',
-			title: 'Memahami resistensi insulin: tanda awal yang sering terlewat',
-			date: '12 Juli 2026',
-			href: '/articles/resistensi-insulin',
-			tone: 'peach' as const,
-		},
-		{
-			category: 'POLA MAKAN',
-			title: 'Makan lebih sadar untuk menjaga kesehatan metabolik',
-			date: '28 Juni 2026',
-			href: '/articles/pola-makan-sadar',
-			tone: 'sage' as const,
-		},
-		{
-			category: 'MENUA DENGAN BAIK',
-			title: 'Tubuh berubah seiring usia. Ini yang dapat kita lakukan.',
-			date: '10 Juni 2026',
-			href: '/articles/tubuh-saat-menua',
-			tone: 'sand' as const,
-		},
+		{ key: 'insulin', href: '/articles/resistensi-insulin', image: health, date: '2026-07-12' },
+		{ key: 'nutrition', href: '/articles/pola-makan-sadar', image: nutrition, date: '2026-06-28' },
+		{ key: 'aging', href: '/articles/tubuh-saat-menua', image: movement, date: '2026-06-10' },
 	];
-	const topics = $derived([
-		$_('home.topics.metabolic'),
-		$_('home.topics.lifestyle'),
-		$_('home.topics.aging'),
-		$_('home.topics.foodAndMovement'),
-	]);
+	onMount(() => {
+		if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+		const observer = new IntersectionObserver(
+			(entries) => {
+				for (const entry of entries) {
+					if (!entry.isIntersecting) continue;
+					entry.target.classList.add('revealed');
+					observer.unobserve(entry.target);
+				}
+			},
+			{ threshold: 0.12 },
+		);
+		document
+			.querySelectorAll(
+				'.consultation-copy > h2, .consultation-copy > p, .care-steps li, .request-card, .reading-item, .reading-section h2, .closing-section h2, .closing-section p',
+			)
+			.forEach((element) => observer.observe(element));
+		return () => observer.disconnect();
+	});
 </script>
 
 <AppHeader />
-<main>
-	<section
-		class="mx-auto grid max-w-6xl items-center gap-10 px-5 pb-18 pt-12 sm:px-8 lg:grid-cols-2 lg:py-20"
-	>
-		<div class="rise-in">
-			<p class="text-xs font-bold tracking-[.16em] text-coral">{$_('home.eyebrow')}</p>
-			<h1
-				class="mt-5 scroll-m-20 font-serif text-5xl font-medium tracking-tight text-balance sm:text-6xl lg:text-7xl"
-			>
-				{$_('home.title')}<br /><em class="text-[#899365]">{$_('home.titleEmphasis')}</em>
+<main id="main-content">
+	<section class="page-frame hero" aria-labelledby="home-title">
+		<div class="hero-copy">
+			<h1 id="home-title" class="scroll-m-20 font-semibold tracking-tight text-balance">
+				<span class="title-line"><span>{$_('care.titleFirst')}</span></span>
+				<span class="title-line"><span>{$_('care.titleSecond')}</span></span>
 			</h1>
-			<p class="mt-6 max-w-md text-lg leading-7 text-ink/70">
-				{$_('home.description')}
+			<p class="hero-description text-lg leading-7 text-muted-foreground">
+				{$_('care.description')}
 			</p>
-			<Button
-				href={appPath('/articles')}
-				size="lg"
-				class="mt-7 bg-[#21352d] text-[#fbfaf6] hover:bg-[#2f4c40]"
-				>{$_('home.articlesCta')} <ArrowRight aria-hidden="true" /></Button
-			>
-		</div>
-		<div class="rise-in-delay relative mx-auto min-h-72 w-full max-w-md" aria-hidden="true">
-			<span class="absolute right-8 top-0 size-24 rounded-full bg-[#f0d88b]"></span><span
-				class="absolute bottom-10 left-6 h-44 w-22 rotate-25 rounded-[100%_0_100%_0] bg-[#91a779]"
-			></span><span
-				class="float absolute bottom-0 right-8 grid size-64 place-items-center rounded-[49%_51%_55%_45%] bg-[#d9a64d] text-paper"
-				><span class="font-serif text-3xl leading-none tracking-tight"
-					>{$_('home.artworkFirst')}<br />{$_('home.artworkSecond')}</span
-				></span
-			>
-		</div>
-	</section>
-	<section class="bg-sage px-5 py-16 sm:px-8">
-		<div class="mx-auto grid max-w-6xl gap-5 md:grid-cols-[1fr_2fr]">
-			<p class="text-xs font-bold tracking-[.16em] text-coral">{$_('home.whyEyebrow')}</p>
-			<p class="font-serif text-3xl leading-tight tracking-tight text-balance sm:text-4xl">
-				{$_('home.whyDescription')}
+			<div class="hero-actions">
+				<Button href="#consultation" class="action-button"
+					>{$_('care.cta')}<ArrowRight aria-hidden="true" /></Button
+				>
+				<a class="text-link font-medium underline-offset-4" href={appPath('/articles')}
+					>{$_('care.read')}<MoveUpRight class="size-4" aria-hidden="true" /></a
+				>
+			</div>
+			<p class="hero-note text-sm text-muted-foreground">
+				<MessageCircle class="size-4 shrink-0" aria-hidden="true" />{$_('care.note')}
 			</p>
 		</div>
-	</section>
-	<section class="mx-auto max-w-6xl px-5 py-18 sm:px-8">
-		<div class="flex flex-col justify-between gap-5 sm:flex-row sm:items-end">
-			<div>
-				<p class="text-xs font-bold tracking-[.16em] text-coral">{$_('home.latestEyebrow')}</p>
-				<h2
-					class="mt-4 scroll-m-20 font-serif text-4xl font-medium tracking-tight text-balance sm:text-5xl"
-				>
-					{$_('home.latestTitleFirst')}<br />{$_('home.latestTitleSecond')}
-				</h2>
+		<figure class="hero-figure">
+			<div class="hero-image">
+				<ResponsiveImage
+					src={consultation}
+					alt={$_('care.imageAlt')}
+					width={1200}
+					height={800}
+					loading="eager"
+					fetchpriority="high"
+				/>
 			</div>
-			<Button href={appPath('/articles')} variant="link" class="w-fit"
-				>{$_('home.allArticles')} <ArrowRight aria-hidden="true" /></Button
+			<figcaption class="flex items-center justify-between gap-4 text-sm">
+				<span>{$_('care.imageCaption')}</span><span class="text-muted-foreground"
+					>{$_('care.imageCredit')}</span
+				>
+			</figcaption>
+		</figure>
+	</section>
+	<div class="care-band">
+		<div class="page-frame flex flex-wrap items-center justify-between gap-x-8 gap-y-4 py-6">
+			{#each ['understand', 'habits', 'personal'] as key (key)}<p
+					class="flex items-center gap-3 text-sm font-medium"
+				>
+					<Check class="size-4 text-primary" aria-hidden="true" />{$_(`care.principles.${key}`)}
+				</p>{/each}
+			<a href="#consultation" class="text-link text-sm font-medium"
+				>{$_('care.start')}<ArrowDown class="size-4" aria-hidden="true" /></a
 			>
 		</div>
-		<div class="mt-10 grid gap-6 md:grid-cols-3">
-			{#each articles as article, i (article.href)}<ArticleCard {article} number={i + 1} />{/each}
-		</div>
-	</section>
-	<section class="bg-[#15251d] px-5 py-16 text-[#fbfaf6] sm:px-8">
-		<div class="mx-auto flex max-w-6xl flex-col justify-between gap-10 md:flex-row">
-			<div>
-				<p class="text-xs font-bold tracking-[.16em] text-[#e5aa77]">{$_('home.topicsEyebrow')}</p>
-				<h2
-					class="mt-4 scroll-m-20 font-serif text-4xl font-medium tracking-tight text-balance sm:text-5xl"
-				>
-					{$_('home.topicsTitleFirst')}<br />{$_('home.topicsTitleSecond')}
-				</h2>
-			</div>
-			<ul class="w-full max-w-xl list-none p-0">
-				{#each topics as topic, i (topic)}<li>
-						<a
-							class="group flex items-center gap-4 border-b border-white/20 py-5 font-serif text-xl transition-colors hover:text-[#e8ad77]"
-							href={appPath('/topics')}
-							><span class="font-sans text-xs text-white/60">0{i + 1}</span><span class="flex-1"
-								>{topic}</span
-							><ChevronRight
-								aria-hidden="true"
-								class="transition-transform group-hover:translate-x-1"
-							/></a
-						>
+	</div>
+	<section
+		id="consultation"
+		class="page-frame consultation-section"
+		aria-labelledby="consultation-title"
+	>
+		<div class="consultation-copy">
+			<h2
+				id="consultation-title"
+				class="section-title scroll-m-20 text-3xl font-semibold tracking-tight text-balance"
+			>
+				{$_('care.consultationTitle')}
+			</h2>
+			<p class="mt-6 max-w-md text-lg leading-7 text-muted-foreground">
+				{$_('care.consultationDescription')}
+			</p>
+			<ol class="care-steps mt-10 list-none p-0">
+				{#each ['choose', 'email', 'confirm'] as step (step)}<li class="flex gap-5">
+						<span class="step-dot" aria-hidden="true"></span>
+						<div>
+							<h3 class="text-base font-semibold tracking-tight">
+								{$_(`care.steps.${step}.title`)}
+							</h3>
+							<p class="mt-1 text-sm leading-6 text-muted-foreground">
+								{$_(`care.steps.${step}.description`)}
+							</p>
+						</div>
 					</li>{/each}
-			</ul>
+			</ol>
+		</div>
+		<ConsultationRequest />
+	</section>
+	<section class="reading-section" aria-labelledby="reading-title">
+		<div class="page-frame">
+			<div class="flex flex-wrap items-end justify-between gap-6">
+				<div>
+					<h2
+						id="reading-title"
+						class="section-title scroll-m-20 text-3xl font-semibold tracking-tight"
+					>
+						{$_('care.readingTitle')}
+					</h2>
+					<p class="mt-4 leading-7 text-muted-foreground">{$_('care.readingDescription')}</p>
+				</div>
+				<a class="text-link font-medium underline-offset-4" href={appPath('/articles')}
+					>{$_('home.allArticles')}<ArrowRight class="size-4" aria-hidden="true" /></a
+				>
+			</div>
+			<div class="article-grid mt-10 grid gap-8 md:grid-cols-3">
+				{#each articles as article (article.key)}<ArticleCard {article} />{/each}
+			</div>
 		</div>
 	</section>
-	<section class="bg-[#f2d9ca] px-5 py-16 dark:bg-[#26382f] sm:px-8">
-		<div class="mx-auto flex max-w-6xl flex-col justify-between gap-8 md:flex-row md:items-center">
+	<section class="closing-section" aria-labelledby="closing-title">
+		<div
+			class="page-frame flex flex-col items-start justify-between gap-8 md:flex-row md:items-center"
+		>
 			<div>
-				<p class="text-xs font-bold tracking-[.16em] text-coral">{$_('home.contactEyebrow')}</p>
 				<h2
-					class="mt-4 scroll-m-20 font-serif text-4xl font-medium tracking-tight text-balance sm:text-5xl"
+					id="closing-title"
+					class="section-title scroll-m-20 text-3xl font-semibold tracking-tight"
 				>
-					{$_('home.contactTitle')}<br /><em class="text-[#899365]">{$_('home.contactEmphasis')}</em
-					>
+					{$_('care.closingTitle')}
 				</h2>
+				<p class="mt-4 max-w-lg leading-7">{$_('care.closingDescription')}</p>
 			</div>
-			<div>
-				<p class="text-lg leading-7 text-ink/70">{$_('home.contactDescription')}</p>
-				<Button
-					href={appPath('/contact')}
-					size="lg"
-					class="mt-5 bg-[#21352d] text-[#fbfaf6] hover:bg-[#2f4c40]"
-					><Mail aria-hidden="true" />{$_('home.contactCta')}</Button
-				>
-			</div>
+			<Button href="#consultation" class="action-button bg-white text-[#153e35] hover:bg-white/90"
+				>{$_('care.cta')}<ArrowRight aria-hidden="true" /></Button
+			>
 		</div>
 	</section>
 </main>

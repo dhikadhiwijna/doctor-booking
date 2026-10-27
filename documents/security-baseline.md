@@ -69,19 +69,19 @@ Cloudflare explicitly requires an origin/application to validate the Access JWT 
 
 ### What protects what
 
-| Control | Purpose | Not sufficient for |
-| --- | --- | --- |
-| Cloudflare Access + validated JWT + role check | Prevents unauthenticated access to admin UI/API | Protecting public booking endpoints from abuse. |
-| `robots.txt` | Tells cooperative crawlers not to crawl a path | Security; malicious bots may ignore it. |
-| Cloudflare Block AI Bots policy | Blocks known AI training/agent crawlers | Authorization or signed webhook validation. |
-| Cloudflare WAF rate limiting + Turnstile | Reduces public endpoint abuse and slot hoarding | Authentication/authorization. |
-| Webhook signature verification | Proves event was sent by the payment/WhatsApp provider | Rate limiting or replay prevention by itself. |
+| Control                                        | Purpose                                                | Not sufficient for                              |
+| ---------------------------------------------- | ------------------------------------------------------ | ----------------------------------------------- |
+| Cloudflare Access + validated JWT + role check | Prevents unauthenticated access to admin UI/API        | Protecting public booking endpoints from abuse. |
+| `robots.txt`                                   | Tells cooperative crawlers not to crawl a path         | Security; malicious bots may ignore it.         |
+| Cloudflare Block AI Bots policy                | Blocks known AI training/agent crawlers                | Authorization or signed webhook validation.     |
+| Cloudflare WAF rate limiting + Turnstile       | Reduces public endpoint abuse and slot hoarding        | Authentication/authorization.                   |
+| Webhook signature verification                 | Proves event was sent by the payment/WhatsApp provider | Rate limiting or replay prevention by itself.   |
 
 ### Required Cloudflare settings
 
 1. In **Security Settings → Configure AI bot policies**, block `Training` and `Agent` behavior zone-wide. Keep `Search` allowed only if search indexing is wanted for public articles.
 2. Publish `robots.txt` that disallows `/admin/`, `/api/admin/`, and `/api/webhooks/`. This is for good crawler hygiene only; it cannot protect data.
-3. Enable one free WAF rate-limit rule for the public booking-start/slot-hold endpoint. Start conservatively at **5 requests per IP per 10 minutes**, then tune from real traffic. Do not apply this rule to payment or WhatsApp webhook paths.
+3. Enable the one free WAF rate-limit rule for the public booking-start/slot-hold endpoint. On the Free zone plan, start conservatively at **5 requests per IP per 10 seconds** and tune from real traffic. Enforce the longer business rule in the application: one active hold per verified WhatsApp number/patient and no duplicate active hold for the same slot. Do not apply the WAF rate-limit rule to payment or WhatsApp webhook paths. Upgrade the zone plan only if a longer or more sophisticated edge rate limit is demonstrably needed.
 4. Use Cloudflare Turnstile on public web booking/form endpoints. WhatsApp conversations do not need a web CAPTCHA.
 5. Add a custom WAF rule to block all requests to `/api/admin/*` arriving on the public hostname; the same route must be reached only via `admin.doktermetabolik.id` and Cloudflare Access.
 

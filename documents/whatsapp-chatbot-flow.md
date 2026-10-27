@@ -17,7 +17,7 @@ Chatbot bukan sarana diagnosis atau keadaan darurat. Pesan pembuka perlu memuat 
 - Bahasa utama: Indonesia. Sediakan pilihan English bila diperlukan.
 - Gunakan tombol/list WhatsApp untuk pilihan yang terbatas; jangan meminta pasien mengingat format teks.
 - Nomor WhatsApp adalah identitas awal. Jangan menganggap nomor itu sudah terverifikasi sebagai pemilik pasien tanpa OTP.
-- Buat *hold* slot selama 60 menit setelah slot dipilih. Satu slot hanya boleh memiliki satu hold aktif.
+- Buat _hold_ slot selama 60 menit setelah slot dipilih. Satu slot hanya boleh memiliki satu hold aktif.
 - Pembayaran dan pembukaan slot dikendalikan server. Pesan pengguna seperti “sudah bayar” tidak mengubah status booking.
 - Jangan mengirim anamnesis, diagnosis, atau data medis sensitif ke grup WhatsApp/admin yang tidak berwenang.
 
@@ -112,13 +112,13 @@ Menu `Booking saya` meminta OTP bila sesi belum terverifikasi, lalu menampilkan 
 
 ## Status dan aturan backend
 
-| Entitas | Status inti | Aturan |
-| --- | --- | --- |
-| Slot | `available`, `held`, `booked`, `blocked` | Tidak boleh dua hold aktif untuk slot yang sama. |
-| Slot hold | `active`, `expired`, `converted`, `released` | Berlaku 60 menit; terikat pada pasien dan order. |
-| Registration | `draft`, `verified`, `complete` | Lengkap hanya setelah OTP dan persetujuan berhasil. |
-| Payment | `created`, `pending`, `paid`, `failed`, `expired`, `refunded` | `paid` hanya dari webhook gateway terverifikasi. |
-| Booking | `payment_pending`, `confirmed`, `cancelled`, `expired` | Hanya `confirmed` yang mengunci slot sebagai booking final. |
+| Entitas      | Status inti                                                   | Aturan                                                      |
+| ------------ | ------------------------------------------------------------- | ----------------------------------------------------------- |
+| Slot         | `available`, `held`, `booked`, `blocked`                      | Tidak boleh dua hold aktif untuk slot yang sama.            |
+| Slot hold    | `active`, `expired`, `converted`, `released`                  | Berlaku 60 menit; terikat pada pasien dan order.            |
+| Registration | `draft`, `verified`, `complete`                               | Lengkap hanya setelah OTP dan persetujuan berhasil.         |
+| Payment      | `created`, `pending`, `paid`, `failed`, `expired`, `refunded` | `paid` hanya dari webhook gateway terverifikasi.            |
+| Booking      | `payment_pending`, `confirmed`, `cancelled`, `expired`        | Hanya `confirmed` yang mengunci slot sebagai booking final. |
 
 Webhook wajib idempoten: event yang terkirim dua kali tidak boleh membuat dua booking atau dua pesan konfirmasi. Simpan ID event dari gateway dan audit log setiap perubahan status.
 

@@ -1,4 +1,78 @@
-export default {
+﻿export default {
+	care: {
+		titleFirst: 'Better health',
+		titleSecond: 'starts here.',
+		description:
+			'Understand your body. Find a healthier rhythm. Take the next step for your metabolic health, with room for a real conversation.',
+		cta: 'Request a consultation',
+		read: 'Explore articles',
+		note: 'A first conversation, at your own pace.',
+		imageAlt: 'A physician holding a phone, with a stethoscope around their neck',
+		imageCaption: 'A conversation is a good start.',
+		imageCredit: 'Photo: Unsplash',
+		start: 'Let’s begin',
+		skip: 'Skip to content',
+		closeMenu: 'Close menu',
+		principles: {
+			understand: 'Understand your metabolic health',
+			habits: 'Build everyday habits',
+			personal: 'Make space for your questions',
+		},
+		consultationTitle: 'Let’s talk about you.',
+		consultationDescription:
+			'Every health journey starts somewhere. Tell us what’s on your mind, and request a consultation by email.',
+		steps: {
+			choose: {
+				title: 'Choose your topic',
+				description: 'Start with what matters to you right now.',
+			},
+			email: {
+				title: 'Send your request',
+				description: 'We’ll prepare an email with your selected topic.',
+			},
+			confirm: {
+				title: 'Arrange the next step',
+				description: 'The team will confirm availability and details by email.',
+			},
+		},
+		request: {
+			title: 'Your first step',
+			description: 'What would you like to discuss?',
+			topicLabel: 'Consultation topic',
+			topics: {
+				metabolic: 'Metabolic health',
+				nutrition: 'Nutrition and daily habits',
+				general: 'I’m not sure where to start',
+			},
+			subject: 'Consultation request — Dokter Metabolik',
+			body: 'Hello Dokter Metabolik,\n\nI would like to request a consultation about: {topic}.\n\nPlease let me know the available schedule and consultation details.\n\nThank you.',
+			send: 'Continue to email',
+			note: 'Opens your email app. Your appointment is confirmed only after the team replies.',
+		},
+		readingTitle: 'A little knowledge. Better choices.',
+		readingDescription: 'Explore the connection between your body and your everyday habits.',
+		articles: {
+			insulin: {
+				category: 'Metabolic health',
+				title: 'Understanding insulin resistance',
+				alt: 'A stethoscope beside a laptop on a desk',
+			},
+			nutrition: {
+				category: 'Food and nutrition',
+				title: 'A more mindful way to eat',
+				alt: 'An assortment of fresh vegetables and leafy greens',
+			},
+			aging: {
+				category: 'Movement and ageing',
+				title: 'Caring for your body as you age',
+				alt: 'A person walking up outdoor steps in running shoes',
+			},
+		},
+		closingTitle: 'Make room for your health.',
+		closingDescription: 'You don’t need all the answers to take the first step.',
+		photoCredits: 'Photography',
+		photoSource: 'Health and everyday life photography from Unsplash.',
+	},
 	navigation: {
 		primary: 'Primary navigation',
 		mobile: 'Mobile navigation',

@@ -8,18 +8,18 @@ Jangan membuat repository chatbot atau backend terpisah pada V1. Satu aplikasi m
 
 ## Bahasa dan teknologi
 
-| Kebutuhan | Pilihan V1 | Alasan |
-| --- | --- | --- |
-| Bahasa aplikasi | **TypeScript** | Satu bahasa untuk UI Svelte dan route server/webhook; sudah menjadi bahasa repository ini. |
-| Frontend dan server | **SvelteKit + Svelte 5** | Website, dashboard, endpoint server, dan webhook berada dalam satu aplikasi. |
-| UI | Tailwind + shadcn-svelte + Lucide | Sudah sesuai konvensi repository; jangan tambah design system lain. |
-| Database | **Cloudflare D1 (SQLite) + Drizzle ORM** | SQL terkelola, serverless, murah; Drizzle memberi schema TypeScript dan migration yang dapat ditinjau. |
-| Deploy dan API runtime | **Cloudflare Workers** dengan `@sveltejs/adapter-cloudflare` | Menjalankan SvelteKit dan menerima webhook tanpa VPS yang selalu menyala. |
-| File/gambar konten | **Cloudflare R2** | Penyimpanan gambar konten murah, termasuk 10 GB dan tanpa biaya egress pada tier gratis saat ini. |
-| Pembayaran | **Midtrans Snap**, aktifkan QRIS + virtual account dahulu | Checkout siap pakai dan webhook status pembayaran; tambahkan metode lain setelah ada kebutuhan. |
-| WhatsApp | **WhatsApp Cloud API langsung dari Meta** | Hindari biaya markup BSP pada V1; endpoint webhook tetap berada di aplikasi yang sama. |
-| Client server-state | `@tanstack/svelte-query` bila UI browser membutuhkan fetch/mutasi | Wajib digunakan oleh konvensi repository untuk state API di klien. |
-| Bahasa data | SQL untuk migration/query; JSON untuk payload API | Tidak perlu GraphQL atau ORM besar/berbasis engine. |
+| Kebutuhan              | Pilihan V1                                                        | Alasan                                                                                                 |
+| ---------------------- | ----------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------ |
+| Bahasa aplikasi        | **TypeScript**                                                    | Satu bahasa untuk UI Svelte dan route server/webhook; sudah menjadi bahasa repository ini.             |
+| Frontend dan server    | **SvelteKit + Svelte 5**                                          | Website, dashboard, endpoint server, dan webhook berada dalam satu aplikasi.                           |
+| UI                     | Tailwind + shadcn-svelte + Lucide                                 | Sudah sesuai konvensi repository; jangan tambah design system lain.                                    |
+| Database               | **Cloudflare D1 (SQLite) + Drizzle ORM**                          | SQL terkelola, serverless, murah; Drizzle memberi schema TypeScript dan migration yang dapat ditinjau. |
+| Deploy dan API runtime | **Cloudflare Workers** dengan `@sveltejs/adapter-cloudflare`      | Menjalankan SvelteKit dan menerima webhook tanpa VPS yang selalu menyala.                              |
+| File/gambar konten     | **Cloudflare R2**                                                 | Penyimpanan gambar konten murah, termasuk 10 GB dan tanpa biaya egress pada tier gratis saat ini.      |
+| Pembayaran             | **Midtrans Snap**, aktifkan QRIS + virtual account dahulu         | Checkout siap pakai dan webhook status pembayaran; tambahkan metode lain setelah ada kebutuhan.        |
+| WhatsApp               | **WhatsApp Cloud API langsung dari Meta**                         | Hindari biaya markup BSP pada V1; endpoint webhook tetap berada di aplikasi yang sama.                 |
+| Client server-state    | `@tanstack/svelte-query` bila UI browser membutuhkan fetch/mutasi | Wajib digunakan oleh konvensi repository untuk state API di klien.                                     |
+| Bahasa data            | SQL untuk migration/query; JSON untuk payload API                 | Tidak perlu GraphQL atau ORM besar/berbasis engine.                                                    |
 
 Saya memilih TypeScript, bukan Python, PHP, Java, atau Go, bukan karena bahasa itu kurang baik, tetapi karena TypeScript telah dipakai aplikasi ini dan dapat menangani UI serta server. Menambah bahasa kedua sekarang hanya menambah deployment, rekrutmen, dan maintenance.
 
@@ -187,18 +187,18 @@ Ini berarti rekomendasi V1 adalah WhatsApp sebagai pintu booking utama, sementar
 
 ## Skema data minimum
 
-| Tabel | Isi minimum | Catatan |
-| --- | --- | --- |
-| `users`, `sessions` | akun dashboard dan session admin | Tidak digunakan sebagai akun pasien V1. |
-| `consultation_types` | nama, durasi, harga, aktif | Mulai satu jenis konsultasi. |
-| `slots` | mulai, selesai, status, consultation type | Admin mengelola slot manual. |
-| `slot_holds` | slot, nomor WhatsApp, expires_at, status | Unik per slot aktif; kedaluwarsa 60 menit. |
-| `patients` | nama, nomor WhatsApp, tanggal lahir bila diperlukan | Simpan data minimum, tidak ada rekam medis detail. |
-| `bookings` | patient, slot, nominal, status, booking code | Status: pending/confirmed/cancelled/expired. |
-| `payment_orders` | order ID, booking, provider ID, status, expiry | Pencatatan idempoten untuk webhook. |
-| `webhook_events` | provider, event ID, received_at, payload hash | Mencegah notifikasi ganda diproses dua kali. |
-| `content_items` | type, title, slug, markdown, status, published_at | Artikel dan halaman statis. |
-| `media` | object key, alt, width, height | File ada di R2, bukan di database. |
+| Tabel                | Isi minimum                                         | Catatan                                            |
+| -------------------- | --------------------------------------------------- | -------------------------------------------------- |
+| `users`, `sessions`  | akun dashboard dan session admin                    | Tidak digunakan sebagai akun pasien V1.            |
+| `consultation_types` | nama, durasi, harga, aktif                          | Mulai satu jenis konsultasi.                       |
+| `slots`              | mulai, selesai, status, consultation type           | Admin mengelola slot manual.                       |
+| `slot_holds`         | slot, nomor WhatsApp, expires_at, status            | Unik per slot aktif; kedaluwarsa 60 menit.         |
+| `patients`           | nama, nomor WhatsApp, tanggal lahir bila diperlukan | Simpan data minimum, tidak ada rekam medis detail. |
+| `bookings`           | patient, slot, nominal, status, booking code        | Status: pending/confirmed/cancelled/expired.       |
+| `payment_orders`     | order ID, booking, provider ID, status, expiry      | Pencatatan idempoten untuk webhook.                |
+| `webhook_events`     | provider, event ID, received_at, payload hash       | Mencegah notifikasi ganda diproses dua kali.       |
+| `content_items`      | type, title, slug, markdown, status, published_at   | Artikel dan halaman statis.                        |
+| `media`              | object key, alt, width, height                      | File ada di R2, bukan di database.                 |
 
 Gunakan `STRICT` tables, foreign keys, unique indexes, prepared statements, serta transaksi `D1.batch()` untuk hold slot dan konfirmasi payment. Dokumentasi D1 menyatakan `batch()` dijalankan sebagai transaksi dan akan rollback bila ada statement yang gagal. [Dokumentasi D1 batch](https://developers.cloudflare.com/d1/worker-api/d1-database/)
 
@@ -254,15 +254,15 @@ Developer perlu mengirim balik kepada pemilik klinik:
 
 ### Biaya teknis V1
 
-| Komponen | Rekomendasi | Biaya awal | Biaya tetap bulanan | Catatan |
-| --- | --- | ---: | ---: | --- |
-| Web, API, webhook, database | Cloudflare Workers Paid + D1 | US$0 | **minimum US$5/bulan** | Pilih paid untuk production agar free-tier harian tidak dapat menghentikan booking. |
-| File gambar konten | Cloudflare R2 | US$0 | Umumnya US$0 pada V1 | Free tier saat ini: 10 GB, 1 juta Class A, 10 juta Class B request/bulan; aktifkan billing account untuk R2. |
-| Domain | Domain yang sudah ada | US$0 | Renewal Hostinger | Di luar biaya Cloudflare; cek tanggal renewal di akun pemilik domain. |
-| Payment gateway | Midtrans | US$0 | US$0 fixed yang diasumsikan | Biaya pembayaran per transaksi, bukan biaya server. |
-| WhatsApp Cloud API | Meta | US$0 setup yang diasumsikan | Tergantung penggunaan | Template/percakapan proaktif ditagihkan sesuai rate card dan kategori pesan Meta saat akun dibuat. |
-| Email/SMS | Tidak dipakai pada MVP | US$0 | US$0 | Tambahkan hanya jika booking web mandiri/OTP fallback benar-benar diperlukan. |
-| Monitoring | Cloudflare dashboard + log | US$0 | US$0 | Tambahkan layanan error monitoring jika traffic atau tim meningkat. |
+| Komponen                    | Rekomendasi                  |                  Biaya awal |         Biaya tetap bulanan | Catatan                                                                                                      |
+| --------------------------- | ---------------------------- | --------------------------: | --------------------------: | ------------------------------------------------------------------------------------------------------------ |
+| Web, API, webhook, database | Cloudflare Workers Paid + D1 |                        US$0 |      **minimum US$5/bulan** | Pilih paid untuk production agar free-tier harian tidak dapat menghentikan booking.                          |
+| File gambar konten          | Cloudflare R2                |                        US$0 |        Umumnya US$0 pada V1 | Free tier saat ini: 10 GB, 1 juta Class A, 10 juta Class B request/bulan; aktifkan billing account untuk R2. |
+| Domain                      | Domain yang sudah ada        |                        US$0 |           Renewal Hostinger | Di luar biaya Cloudflare; cek tanggal renewal di akun pemilik domain.                                        |
+| Payment gateway             | Midtrans                     |                        US$0 | US$0 fixed yang diasumsikan | Biaya pembayaran per transaksi, bukan biaya server.                                                          |
+| WhatsApp Cloud API          | Meta                         | US$0 setup yang diasumsikan |       Tergantung penggunaan | Template/percakapan proaktif ditagihkan sesuai rate card dan kategori pesan Meta saat akun dibuat.           |
+| Email/SMS                   | Tidak dipakai pada MVP       |                        US$0 |                        US$0 | Tambahkan hanya jika booking web mandiri/OTP fallback benar-benar diperlukan.                                |
+| Monitoring                  | Cloudflare dashboard + log   |                        US$0 |                        US$0 | Tambahkan layanan error monitoring jika traffic atau tim meningkat.                                          |
 
 Target biaya platform tetap V1 adalah **sekitar US$5/bulan plus perpanjangan domain**. Jangan gunakan Workers Free untuk production booking: batas gratis saat ini adalah 100.000 request/hari dan D1 memiliki batas harian; setelah terlewati, query dapat gagal sampai reset. Workers Paid memiliki minimum US$5/bulan. [Harga Workers](https://developers.cloudflare.com/workers/platform/pricing/) [Harga D1](https://developers.cloudflare.com/d1/platform/pricing/)
 

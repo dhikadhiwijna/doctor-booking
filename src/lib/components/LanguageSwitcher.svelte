@@ -1,4 +1,4 @@
-<script lang="ts">
+﻿<script lang="ts">
 	import { onMount } from 'svelte';
 	import { locale, _ } from 'svelte-i18n';
 	import { ToggleGroup, ToggleGroupItem } from '$lib/components/ui/toggle-group/index.js';
@@ -29,12 +29,12 @@
 	aria-label={$_('language.label')}
 >
 	<ToggleGroupItem
-		class="h-7 rounded-md border-b-2 border-transparent bg-transparent px-1.5 text-[10px] font-bold tracking-wide text-muted-foreground shadow-none transition-colors duration-200 hover:bg-transparent hover:text-foreground data-[state=on]:bg-transparent data-[state=on]:text-coral data-[state=on]:shadow-none data-[state=on]:[border-bottom-color:currentColor] motion-reduce:transition-none"
+		class="h-10 min-w-9 rounded-full bg-transparent px-2 text-xs font-semibold text-muted-foreground shadow-none transition-colors duration-200 hover:bg-sage hover:text-foreground data-[state=on]:bg-sage data-[state=on]:text-primary data-[state=on]:shadow-none motion-reduce:transition-none"
 		value="id"
 		aria-label={$_('language.indonesian')}>ID</ToggleGroupItem
 	>
 	<ToggleGroupItem
-		class="h-7 rounded-md border-b-2 border-transparent bg-transparent px-1.5 text-[10px] font-bold tracking-wide text-muted-foreground shadow-none transition-colors duration-200 hover:bg-transparent hover:text-foreground data-[state=on]:bg-transparent data-[state=on]:text-coral data-[state=on]:shadow-none data-[state=on]:[border-bottom-color:currentColor] motion-reduce:transition-none"
+		class="h-10 min-w-9 rounded-full bg-transparent px-2 text-xs font-semibold text-muted-foreground shadow-none transition-colors duration-200 hover:bg-sage hover:text-foreground data-[state=on]:bg-sage data-[state=on]:text-primary data-[state=on]:shadow-none motion-reduce:transition-none"
 		value="en"
 		aria-label={$_('language.english')}>EN</ToggleGroupItem
 	>

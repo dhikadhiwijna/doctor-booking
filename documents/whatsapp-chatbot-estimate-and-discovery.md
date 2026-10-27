@@ -8,16 +8,16 @@ Dokumen ini dapat dikirim kepada calon klien/pemilik klinik sebagai dasar diskus
 
 Paket ini mencakup chatbot WhatsApp untuk memperkenalkan Dokter Oscar, melihat jadwal, menahan slot 60 menit, verifikasi OTP, form registrasi, checkout QRIS/VA, konfirmasi dari webhook pembayaran, serta eskalasi ke admin. Estimasi pengerjaan 6–8 minggu setelah akses akun dan materi konten lengkap.
 
-| Ruang kerja | Nilai estimasi |
-| --- | ---: |
-| Discovery, arsitektur, dan kontrak API | Rp3.500.000 |
-| Setup WhatsApp Business Platform, webhook, dan template pesan | Rp5.000.000 |
-| Shared Booking API: jadwal, slot hold, registrasi, status booking | Rp12.000.000 |
-| Integrasi payment gateway: order, checkout, webhook, expiry | Rp6.500.000 |
-| Flow chatbot, handoff admin, dan pesan notifikasi | Rp5.000.000 |
-| QA skenario penting, keamanan dasar, deployment, runbook | Rp5.000.000 |
-| Project management, demo, dan dua putaran revisi minor | Rp2.500.000 |
-| **Total** | **Rp39.500.000** |
+| Ruang kerja                                                       |   Nilai estimasi |
+| ----------------------------------------------------------------- | ---------------: |
+| Discovery, arsitektur, dan kontrak API                            |      Rp3.500.000 |
+| Setup WhatsApp Business Platform, webhook, dan template pesan     |      Rp5.000.000 |
+| Shared Booking API: jadwal, slot hold, registrasi, status booking |     Rp12.000.000 |
+| Integrasi payment gateway: order, checkout, webhook, expiry       |      Rp6.500.000 |
+| Flow chatbot, handoff admin, dan pesan notifikasi                 |      Rp5.000.000 |
+| QA skenario penting, keamanan dasar, deployment, runbook          |      Rp5.000.000 |
+| Project management, demo, dan dua putaran revisi minor            |      Rp2.500.000 |
+| **Total**                                                         | **Rp39.500.000** |
 
 ### Yang termasuk
 
@@ -42,28 +42,60 @@ Paket ini mencakup chatbot WhatsApp untuk memperkenalkan Dokter Oscar, melihat j
 
 ## Opsi harga agar ruang lingkup jelas
 
-| Pilihan | Biaya implementasi | Cocok bila | Batas utama |
-| --- | ---: | --- | --- |
-| Lite | Rp18–25 juta | Jadwal dan booking API sudah tersedia; hanya perlu chatbot, form sederhana, dan link checkout | Tidak mencakup pembuatan shared Booking API atau dashboard. |
-| **MVP rekomendasi** | **Rp39,5 juta** | Booking API belum ada dan bot harus mengelola hold, registrasi, serta payment end-to-end | Satu dokter, satu bahasa, dan satu alur konsultasi. |
-| Lanjutan | Rp55–80 juta | Membutuhkan dashboard kustom, multi-dokter, reschedule otomatis, laporan, dan integrasi eksternal | Didefinisikan setelah discovery; bukan fixed scope awal. |
+| Pilihan             | Biaya implementasi | Cocok bila                                                                                        | Batas utama                                                 |
+| ------------------- | -----------------: | ------------------------------------------------------------------------------------------------- | ----------------------------------------------------------- |
+| Lite                |       Rp18–25 juta | Jadwal dan booking API sudah tersedia; hanya perlu chatbot, form sederhana, dan link checkout     | Tidak mencakup pembuatan shared Booking API atau dashboard. |
+| **MVP rekomendasi** |    **Rp39,5 juta** | Booking API belum ada dan bot harus mengelola hold, registrasi, serta payment end-to-end          | Satu dokter, satu bahasa, dan satu alur konsultasi.         |
+| Lanjutan            |       Rp55–80 juta | Membutuhkan dashboard kustom, multi-dokter, reschedule otomatis, laporan, dan integrasi eksternal | Didefinisikan setelah discovery; bukan fixed scope awal.    |
 
 Jika website booking pada repository terpisah juga ingin dibuat bersamaan, tambahkan **Rp15–25 juta** untuk frontend web dan integrasinya. Angka tepatnya bergantung pada desain, autentikasi, halaman konten, serta apakah website memakai API booking yang sama.
 
 ## Biaya berjalan bulanan dan per transaksi
 
-| Item | Estimasi | Cara penagihan |
-| --- | ---: | --- |
-| Hosting, database, backup, monitoring | Rp500.000–1.500.000/bulan | Pass-through atau dikelola developer. |
-| Support dan maintenance | Rp2.000.000–5.000.000/bulan | Opsional; mencakup monitoring, patch kecil, dan kuota jam kerja. |
-| WhatsApp Business Platform / BSP | Mengikuti rate card Meta/BSP | Pass-through berdasarkan negara, kategori, dan jumlah template message. |
-| OTP SMS, jika dipakai sebagai fallback | Mengikuti vendor | Pass-through per pesan. |
-| QRIS payment gateway | **0,7% per transaksi sukses** untuk merchant reguler | Dipotong gateway atau dibebankan sesuai konfigurasi checkout. |
-| Refund / metode pembayaran lain | Mengikuti gateway | Pass-through; dikonfirmasi sebelum aktivasi. |
+| Item                                   |                                             Estimasi | Cara penagihan                                                                                                    |
+| -------------------------------------- | ---------------------------------------------------: | ----------------------------------------------------------------------------------------------------------------- |
+| Infrastruktur Cloudflare production    |                               **minimum US$5/bulan** | Dibayar langsung oleh klinik ke Cloudflare; budget internal sekitar Rp100.000/bulan, tergantung kurs/kartu/pajak. |
+| Support dan maintenance                |                          Rp2.000.000–5.000.000/bulan | Opsional; mencakup monitoring, patch kecil, dan kuota jam kerja.                                                  |
+| WhatsApp Business Platform / BSP       |                         Mengikuti rate card Meta/BSP | Pass-through berdasarkan negara, kategori, dan jumlah template message.                                           |
+| OTP SMS, jika dipakai sebagai fallback |                                     Mengikuti vendor | Pass-through per pesan.                                                                                           |
+| QRIS payment gateway                   | **0,7% per transaksi sukses** untuk merchant reguler | Dipotong gateway atau dibebankan sesuai konfigurasi checkout.                                                     |
+| Refund / metode pembayaran lain        |                                    Mengikuti gateway | Pass-through; dikonfirmasi sebelum aktivasi.                                                                      |
+
+### Rincian biaya Cloudflare untuk V1
+
+Rekomendasi production adalah satu akun Cloudflare milik klinik dengan **Workers Paid**. Biaya minimum adalah **US$5 per bulan per akun**; bukan US$5 untuk setiap subdomain, Worker, atau database. Nilai Rupiah pada tagihan bergantung kurs kartu/bank dan pajak, sehingga quotation memakai US$5 sebagai nilai sumber serta Rp100.000/bulan hanya sebagai buffer anggaran.
+
+| Layanan Cloudflare               |                                   Biaya V1 | Yang didapat / batas sebelum overage                                                                                                                                      | Dipakai untuk                                                                             |
+| -------------------------------- | -----------------------------------------: | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------- |
+| DNS, SSL/TLS, CDN dasar          |                                       US$0 | Domain dan subdomain `www`/`admin` di zone yang sama                                                                                                                      | `doktermetabolik.id`, `www`, `admin`. Tidak ada biaya Hostinger tambahan untuk subdomain. |
+| Workers Paid                     |                     **minimum US$5/bulan** | 10 juta request dan 30 juta CPU-ms/bulan termasuk; request di atasnya US$0,30 per juta dan CPU di atasnya US$0,02 per juta CPU-ms                                         | SvelteKit website, dashboard, API, webhook Meta/Midtrans.                                 |
+| D1 database                      |               US$0 tambahan pada volume V1 | Pada Workers Paid: 25 miliar row read/bulan, 50 juta row write/bulan, dan 5 GB storage termasuk; setelahnya read US$0,001/juta, write US$1/juta, storage US$0,75/GB-bulan | Booking, slot hold, content CMS, audit log, payment event.                                |
+| R2 object storage                |                       Umumnya US$0 pada V1 | 10 GB storage, 1 juta Class A, 10 juta Class B operation/bulan gratis; setelahnya storage US$0,015/GB-bulan. Egress internet gratis.                                      | Foto Dokter Oscar dan gambar artikel.                                                     |
+| Workers Logs                     |                        US$0 pada volume V1 | 20 juta log event/bulan dan 7 hari retention termasuk; setelahnya US$0,60 per juta event                                                                                  | Error dan security log tanpa data pasien/secret.                                          |
+| Turnstile                        |                                       US$0 | Free: hingga 20 widget dan challenge tak terbatas; server wajib memvalidasi token                                                                                         | Form booking web dan form publik.                                                         |
+| Cloudflare Access                | US$0 yang diharapkan untuk tim admin kecil | Gunakan Zero Trust Free/allowlist email; konfirmasi entitlement akun saat onboarding                                                                                      | Proteksi `admin.doktermetabolik.id`.                                                      |
+| WAF custom rules + AI bot policy |                               US$0 pada V1 | Free zone: 5 custom rule dan 1 rate-limit rule; block AI bot policy tersedia untuk semua customer                                                                         | Blok admin API di public hostname, AI crawler, dan abuse dasar.                           |
+
+Cloudflare Workers Paid memberi minimum US$5/bulan, dengan 10 juta request/bulan dan 30 juta CPU-ms sebelum overage. [Harga Workers](https://developers.cloudflare.com/workers/platform/pricing/)
+
+D1 tidak mempunyai biaya compute saat database diam; pada Workers Paid, kuota termasuknya jauh di atas kebutuhan booking klinik V1. [Harga D1](https://developers.cloudflare.com/d1/platform/pricing/)
+
+R2 memberi 10 GB free tier dan tidak mengenakan egress internet; Workers Logs serta Turnstile juga memiliki kuota gratis yang cukup untuk V1. [Harga R2](https://developers.cloudflare.com/r2/pricing/) [Workers Logs](https://developers.cloudflare.com/workers/observability/logs/workers-logs/) [Paket Turnstile](https://developers.cloudflare.com/turnstile/plans/)
+
+### Contoh tagihan Cloudflare
+
+| Skenario                                                            | Perkiraan penggunaan                                                |                              Estimasi biaya Cloudflare |
+| ------------------------------------------------------------------- | ------------------------------------------------------------------- | -----------------------------------------------------: |
+| Pilot: 100 booking/bulan, 5.000 kunjungan website, <2 GB gambar     | Jauh di bawah semua kuota yang termasuk                             |                                         **US$5/bulan** |
+| V1 aktif: 500 booking/bulan, 30.000 kunjungan website, <5 GB gambar | Jauh di bawah 10 juta Worker request dan 5 GB D1                    |                                         **US$5/bulan** |
+| Traffic besar                                                       | Lebih dari 10 juta dynamic Worker request atau 30 juta CPU-ms/bulan |                    US$5 + overage Workers yang terukur |
+| Media besar                                                         | Lebih dari 10 GB R2                                                 | US$5 + US$0,015 per GB-bulan storage di atas free tier |
+
+Skenario ini tidak memasukkan Meta/WhatsApp, Midtrans, perpanjangan domain Hostinger, SMS/email, maupun support developer. Buat billing alert dan CPU limit pada Cloudflare sejak awal agar bug atau serangan tidak menciptakan tagihan yang tidak terduga.
 
 Untuk pembayaran QRIS, Midtrans menyatakan MDR untuk merchant reguler adalah 0,7% per transaksi sukses. Konfirmasikan kembali saat onboarding karena klasifikasi merchant dan kebijakan gateway dapat memengaruhi biaya. [Dokumentasi biaya QRIS Midtrans](https://docs.midtrans.com/docs/berapa-biaya-transaksi-untuk-qris)
 
-Untuk WhatsApp, gunakan biaya vendor sebagai *pass-through* pada invoice bulanan, bukan angka tetap dalam quotation. Kebijakan WhatsApp mewajibkan template yang disetujui untuk percakapan yang dimulai bisnis dan mewajibkan jalur eskalasi manusia; rate card dan kategori template perlu dikonfirmasi pada akun Meta/BSP klien saat setup. [Kebijakan WhatsApp Business](https://business.whatsapp.com/policy/preview?lang=id_ID)
+Untuk WhatsApp, gunakan biaya vendor sebagai _pass-through_ pada invoice bulanan, bukan angka tetap dalam quotation. Kebijakan WhatsApp mewajibkan template yang disetujui untuk percakapan yang dimulai bisnis dan mewajibkan jalur eskalasi manusia; rate card dan kategori template perlu dikonfirmasi pada akun Meta/BSP klien saat setup. [Kebijakan WhatsApp Business](https://business.whatsapp.com/policy/preview?lang=id_ID)
 
 ### Contoh proyeksi volume
 
